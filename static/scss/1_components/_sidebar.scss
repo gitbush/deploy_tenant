@@ -1,0 +1,53 @@
+#sidebar {
+    position: fixed;;
+    display: block;
+	width: 60px;
+    left: -60px;
+    top: 0;
+    z-index: 99;
+	height: 100vh;
+	background-image: linear-gradient(0deg, #008161 0%, #2f5f5b 23%, #343347 100%);
+	color:#FAFAFA;
+	transition: all .5s;
+}
+
+#content{
+    margin-top: 60px;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+}
+
+#sidebar.show-sidebar {
+	left: 0px;
+	/* transition: all .3s; */
+}
+
+.sidebar-menu{
+    padding: 0;
+    text-align: center;
+}
+
+.sidebar-image{
+    height: 60px;
+    border-bottom: 1px solid white;
+}
+
+.sidebar-item{
+    list-style: none;
+    margin: 15px 0px;
+}
+
+.sidebar-icon{
+    height: 2.5rem;
+}
+
+.sidebar-icon-sm{
+    height: 3rem;
+}
+
+.profile-icon{
+    width: 3rem;
+    height: 3rem;
+    margin: 5px 0;
+    box-shadow: 1px 2px 2px #636363;
+}

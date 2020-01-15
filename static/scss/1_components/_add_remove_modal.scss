@@ -1,0 +1,30 @@
+.add-modal-content {
+    top: 50%;
+    min-height: 350px;
+}
+
+.remove-modal-content{
+    top: 30%;
+}
+
+.add-tenant-icon{
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 5px 0;
+    box-shadow: 1px 2px 2px #636363;
+}
+
+.tenant-suggestion{
+    cursor: pointer;
+    &:hover{
+        background-color: #bbb;
+        border-radius: 5px;
+    }
+}
+
+#add-user-list{
+    min-height: 170px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+

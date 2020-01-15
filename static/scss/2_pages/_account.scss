@@ -1,0 +1,40 @@
+
+.account-top-color{
+    left:0;
+    height: 10rem;
+}
+
+.account-info-list{
+    list-style: none;
+    line-height: 1.5rem;
+    padding: 2rem 2rem 0 0;
+    @include mobile-device{
+        color: black;
+    }
+    @include large-mobile-device{
+        margin-left: 1rem;
+    }
+}
+
+.account-img{
+    margin-top: .8rem;
+    margin-bottom: .8rem;
+    padding: .5rem;
+    width: 9rem;
+    height: 9rem;
+    box-shadow: 2px 2px 4px 1px #333;
+}
+
+.account-edit-btn{
+    margin: .7rem;
+    @include mobile-device{
+        margin: .7rem; 
+    }
+    @include large-mobile-device{
+        margin: .7rem;
+    }
+}
+
+.edit-confirm-btn{
+    margin: .4rem;
+}

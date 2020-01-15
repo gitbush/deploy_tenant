@@ -1,0 +1,8 @@
+tenant_env/
+*.sqlite3
+__pycache__
+*.json
+.vscode
+.env
+htmlcov
+.coverage

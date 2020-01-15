@@ -1,0 +1,1 @@
+web: gunicorn tenant_share_project.wsgi:application

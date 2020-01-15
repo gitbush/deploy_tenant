@@ -1,0 +1,20 @@
+.check-img{
+    width: 7rem;
+    margin: 10px;
+    border: 1px solid #bbb;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    @include mobile-up{
+        width: 8rem;
+    }
+}
+
+#credit-card-errors{
+    display: none;
+    color: red;
+    height: 30px;
+    border-radius: 2px;
+    padding: 5px;
+    background-color: rgba(242, 38, 19, .2);
+}

@@ -1,0 +1,46 @@
+.max-card{
+    max-width: 950px;
+}
+
+.request-toggle{
+    padding: .5rem;
+    position: relative;
+    background-color: #e8e8e8;
+    border-radius: 5px;
+    margin: 0.4rem;
+    max-width: 280px;
+}
+
+.request-toggle-item{
+    position: relative;
+    z-index: 99;
+    margin:0 2rem;
+    text-decoration: none;
+    color: black;
+}
+
+.request-toggle-item:hover{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+#request-toggle-switch{
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    width: 123px;
+    border-radius: 5px;
+    height: 30px;
+    background-color: white;
+    box-shadow: 2px 2px 3px 2px #ccc;
+    transition: all .5s;
+}
+
+#request-toggle-switch.toggle-switch{
+    left: 135px;
+}
+
+#message-view{
+    display: none;
+}

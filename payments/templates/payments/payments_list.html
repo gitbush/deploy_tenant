@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <!-- add payment form -->
+    <div class="row justify-content-center">
+        <div class="card max-card col-11 mt-2">
+            <div class="row mb-3">
+                <div class="col-12 card-header p-2">
+                    <h3 class="md-heading m-1">Payments List</h3>
+                </div>
+                <form class="col-12" action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row justify-content-center m-0">
+                        <legend class="label-heading text-center m-2">Add Payment - Select relevant maintenance request and set amount payable</legend>
+                        <hr class="col-11 m-1">
+                        <div class="row justify-content-center">
+                            <div class="col-11 col-sm-6 form-m-0">{{ payment_form.maint_request|as_crispy_field }}</div>
+                            <div class="col-5 col-sm-3 form-m-0">{{ payment_form.amount|as_crispy_field }}</div>
+                            <div class="col-4 col-sm-2 p-sm-0 pl-md-2 align-self-end">
+                                <button class="btn btn-md btn-outline-info" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END: add payment -->
+
+    <!-- payment history list -->
+    <div class="row justify-content-center mt-3">
+        <div class="card max-card col-11 p-0">
+            {% if payments %}
+            <table class="table table-striped md-text text-center m-0">
+                <thead>
+                    <tr>
+                    <th scope="col">Ref</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Action/Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payments %}
+                        <tr>
+                        <td>#{{ payment.maint_request.id }}</td>
+                        <td>{{ payment.payment_date.date }}</td>
+                        <td>£{{ payment.amount }}</td>
+                        {% if payment.is_paid %}
+                            <td class="text-center">
+                                <span class="badge-lg badge-success">Paid</span>
+                            </td>
+                        {% else %}
+                            <td class="text-center">
+                                <a href="{% url 'checkout' payment_id=payment.id %}" class="btn btn-sm btn-success mr-sm-1">Pay</a>
+                                <button id="delete-payment-btn" class="btn btn-sm btn-danger ml-sm-1 modal-open delete-btn" data-payID="{{ payment.id }}">X</button>
+                            </td>
+                        {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- pagination -->
+            <div class="row justify-content-center m-0 pagination-row">
+                <span class="step-links m-2">
+                    {% if payments.has_previous %}
+                    <a href="?page=1" class="btn btn-md btn-outline-info">&Lang;</a>
+                    <a href="?page={{ payments.previous_page_number }}" class="btn btn-md btn-outline-info">&lang;</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        <a href="?page= {{ payments.number }}" class="btn btn-md btn-info">{{ payments.number }}</a>
+                    </span>
+            
+                    {% if payments.has_next %}
+                    <a href="?page={{ payments.next_page_number }}" class="btn btn-md btn-outline-info">&rang;</a>
+                    <a href="?page={{ payments.paginator.num_pages }}" class="btn btn-md btn-outline-info">&Rang;</a>
+                    {% endif %}
+                </span>
+            </div>
+            <!-- END: pagination -->
+            {% else %}
+            <div class="row justify-content-center">
+                <div class="card col-10 col-md-9 mt-3 mb-3">
+                    <div class="col-12 text-center">
+                        <p class="md-text m-2">- No payments -</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- END: payment history list -->
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% load crispy_forms_tags %}
+
+<div class="col-12">
+    <!-- status info row -->
+    <div class="row m-0 justify-content-center">
+        <div class="col-5 col-sm-3 col-md-2 col-lg-2 text-center p-0 mb-2">
+            <p class="md-text m-1">Status</p>
+            {% if user.profile.register_as == 'Landlord' %}
+            <form action="" method="POST" name="status" id="status-form">
+                {% csrf_token %}
+                {{ status_form|crispy }}
+            </form>
+            {% else %}
+            <span class="badge badge-md badge-danger">{{ maint_request.status.title }}</span>               
+            {% endif %}
+        </div>
+        <div class="col-5 col-sm-3 col-md-2 col-lg-2 text-center p-0 mb-2">
+            <p class="md-text m-1">Priority</p>
+            <span class="badge badge-md priority-badge">{{ maint_request.priority.title }}</span>
+        </div>
+        <div class="col-5 col-sm-3 col-md-2 col-lg-2 text-center p-0 mb-2">
+            <p class="md-text m-1">Raised by</p>
+            <span class="badge badge-md badge-info">{{ maint_request.author.first_name }}</span>
+        </div>
+        <div class="col-5 col-sm-3 col-md-2 col-lg-2 text-center p-0 mb-2">
+            <p class="md-text m-1">Date</p>
+            <span class="badge badge-md badge-light">{{ maint_request.date_raised.date }}</span>
+        </div>
+    </div>
+    <!-- END: status info row -->
+    <hr class="m-2">
+    <!-- maintenance detail -->
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h4 class="md-heading">Title</h4>
+            <p class="md-text">{{ maint_request.title }}</p>
+            <hr>
+        </div>
+        <div class="col-12">
+            <h4 class="md-heading">Details</h4>
+            <p class="md-text">{{ maint_request.details }}</p>
+            <hr>
+        </div>
+        <div class="col-12">
+            <h4 class="md-heading">Photos</h4>          
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <img src="{{ maint_request.image.url }}" class="img-fluid" alt="maint-photo-1">
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="md-heading">Cost/Quote</h4>
+                </div>
+                {% if user.profile.register_as == 'Landlord' %}
+                <div class="col-12">
+                    <form class="row" action="" method="POST" enctype="multipart/form-data" name='cost'>
+                        {% csrf_token %}
+                        <label class="sm-heading col-12">As the landlord you can set the cost and upload quote/invoice of repairs</label>
+                        <div class="col-6 col-sm-3">{{ assign_cost_form.cost|as_crispy_field }}</div>
+                        <div class="col-6 col-sm-3">{{ assign_cost_form.paid_by|as_crispy_field }}</div>
+                        <div class="col-6 col-sm-4">
+                            {{ assign_cost_form.invoice_pdf|as_crispy_field }}
+                        </div>
+                        <div class="col-6 col-sm-2 text-center align-self-center">
+                            <button class="btn btn-md btn-primary" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                {% else %}
+                    {% if maint_request.paid_by == 'tenant' %}
+                    <div class="col-12 col-sm-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="md-text">Cost: £{{ maint_request.cost }}</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="md-text">
+                                    Invoice/Quote: 
+                                    {% if maint_request.invoice_pdf %}
+                                        <a class="btn btn-sm btn-primary" href="{{ maint_request.invoice_pdf.url }}" download="Invoice {{ maint_request.id}}">Download</a>
+                                    {% else %}
+                                        None uploaded
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="col-12">
+                                <p class="md-text">To be paid by <b>{{ maint_request.paid_by }}</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% elif maint_request.paid_by == 'Landlord' %}
+                    <div class="col-12">
+                        <p class="md-text">To be paid by <b>{{ maint_request.paid_by }}</b></p>
+                    </div>
+                    {% else %}
+                    <div class="col-12">
+                        <p class="md-text">Awaiting update from Landlord</p>
+                    </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- END: maintenance detail -->
+</div>

@@ -1,0 +1,33 @@
+<!-- oustanding maintenance list items -->
+{% for request in requests %}
+<div class="col-12 p-2">
+    <div id="home-maint-list-item" class="maint-list-item">
+        <div id="home-maint-img">
+            <img src="{{ request.image.url }}" class="img-fluid img-rounded maint-img" alt="maintenance-photo">
+        </div>
+        <div id="home-maint-info">
+            <p class="md-text m-0"><b>{{ request.date_raised.date }}</b></p>
+            <p class="md-text m-0">#{{ request.id }}&nbsp;{{ request.title }}</p>  
+            <div>
+                <a class="btn btn-sm btn-success m-2" href="{% url 'maint-detail' id=request.id %}">View</a> 
+                {% if request.user == userLandlord %}
+                <button id="delete-request-btn" class="btn btn-sm btn-danger m-2 modal-open" data-maint-id="{{ request.id }}">Delete</button>
+                {% endif %}        
+            </div> 
+        </div>
+        <div id="home-maint-status">
+            <hr class="m-0 d-md-none">
+            <div class="p-2">
+                <div class="d-inline mr-1">
+                    <p class="md-text d-inline">Priority</p>    
+                    <span id="priority-badge" class="badge priority-badge">{{ request.priority.title }}</span>
+                </div>
+                <div class="d-inline ml-1">
+                    <p class="md-text d-inline">Status</p>
+                    <span id="status-badge" class="badge badge-info status-badge">{{ request.status.title }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

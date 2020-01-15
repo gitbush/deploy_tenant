@@ -1,0 +1,26 @@
+#edit-profile-alert{
+    position: fixed;
+    top: -120px;
+    right: 50px;
+    min-height: 80px;
+    width: 250px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 3px 4px 6px 1px #767474;
+    transition: .5s ease-out;
+}
+
+#edit-profile-alert.show-alert{
+    transition: 1.5s;
+    top: 80px;
+}
+
+.alert-list{
+    list-style: none;
+}
+
+.alert-header{
+    color: green;
+    font-weight: bold;
+    font-size: 1rem;
+}
